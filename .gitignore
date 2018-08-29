@@ -1,0 +1,29 @@
+# directory #
+/work/*
+!/work/.gitkeep
+/WEB-INF/classes/
+
+*.class
+
+# Package Files #
+#*.jar Manually customize
+*.war
+*.ear
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea
+
+# eclipse
+out/
+.settings/
+.classpath
+.project
+
+# Gradle #
+.gradle
+/bin/
+/build/
+/export/

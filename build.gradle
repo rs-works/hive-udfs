@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '2.0.3'
+}
+
+version = '1.1'
+
+// javaバージョン指定
+sourceCompatibility = targetCompatibility = 1.7
+
+// ソースのエンコーディング指定
+tasks.withType(AbstractCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// providedCompileを使う
+configurations {
+    providedCompile
+}
+
+sourceSets {
+    main.compileClasspath += configurations.providedCompile
+    test.compileClasspath += configurations.providedCompile
+    test.runtimeClasspath += configurations.providedCompile
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repository.cloudera.com/artifactory/cloudera-repos/'
+    }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.+'
+
+	providedCompile 'org.apache.hive:hive-jdbc:1.1.0-cdh5.4.4'
+
+	providedCompile 'org.apache.hadoop:hadoop-common:2.6.0-cdh5.4.4'
+
+	providedCompile 'org.apache.hive:hive-exec:1.1.0-cdh5.4.4', { transitive = false }
+
+	compile 'com.maxmind.db:maxmind-db:1.2.2'
+}
+
+clean {
+	delete './export'
+}
+
+compileJava {
+    options.compilerArgs = ['-XDignore.symbol.file', '-source', sourceCompatibility , '-target', targetCompatibility]
+    options.fork = true
+    options.forkOptions.executable = 'javac'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+// FatJar生成
+shadowJar {
+    // Hadoop内のJacksonとバージョン衝突するので再配置する(CDH5.13)
+    relocate 'com.fasterxml.jackson', 'shadow.com.fasterxml.jackson'
+    destinationDir = file('./export')
+    archiveName = 'udf.jar'
+}
+
+// gradle wrapper生成
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.6'
+}
