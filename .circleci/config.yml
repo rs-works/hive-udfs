@@ -2,7 +2,7 @@ version: 2.1
 executors:
   java:
     docker:
-      - image: openjdk:7-jdk
+      - image: openjdk:8-jdk
 jobs:
   build:
     executor: java
