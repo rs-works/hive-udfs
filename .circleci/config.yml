@@ -8,8 +8,8 @@ jobs:
     executor: java
     steps:
       - checkout
-      - run: ./gradlew :clean
-      - run: ./gradlew :build
+      - run: java -version
+      - run: ./gradlew clean build
 workflows:
   build:
     jobs:
