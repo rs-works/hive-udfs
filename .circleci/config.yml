@@ -9,8 +9,6 @@ jobs:
     steps:
       - checkout
       - run: java -version
-      - run: ./gradlew clean build
-workflows:
-  build:
-    jobs:
-      - build
+      - run: ./gradlew clean
+      - run: ./gradlew test
+      - run: ./gradlew shadowJar
