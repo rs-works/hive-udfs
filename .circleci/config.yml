@@ -2,7 +2,7 @@ version: 2.1
 executors:
   java:
     docker:
-      - image: circleci/openjdk:1.7
+      - image: openjdk:7-jdk-alpine
 jobs:
   build:
     executor: java
