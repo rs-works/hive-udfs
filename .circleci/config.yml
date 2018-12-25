@@ -1,0 +1,16 @@
+version: 2.1
+executors:
+  java7:
+    docker:
+      - image: circleci/openjdk:1.7
+jobs:
+  build:
+    executor: java7
+    steps:
+      - checkout
+      - run: ./gradlew :clean
+      - run: ./gradlew :build
+workflows:
+  build:
+    jobs:
+      - build
