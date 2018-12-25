@@ -9,6 +9,6 @@ jobs:
     steps:
       - checkout
       - run: java -version
-      - run: ./gradlew clean
+      - run: ./gradlew clean build
       - run: ./gradlew test
       - run: ./gradlew shadowJar
