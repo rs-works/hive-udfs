@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/rs-works/hive-udfs.svg?style=shield&circle-token=e19f73e0aa5b8de1d3b5b6c90c01330a3b247b67)](https://circleci.com/gh/rs-works/hive-udfs)
+
 ## Desc Function Extended
 
 * yearweek
